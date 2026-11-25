@@ -70,16 +70,6 @@ html.lenis body {
 html[data-intro="pending"] {
   overflow: hidden;
 }
-/* Phones skip the intro entirely: the page shows and scrolls before any JavaScript runs */
-@media (max-width: 767px) {
-  html[data-intro="pending"] {
-    overflow: visible;
-  }
-  [data-preloader] {
-    display: none !important;
-  }
-}
-
 section[id] {
   scroll-margin-top: calc(var(--nav-h) + 12px);
 }

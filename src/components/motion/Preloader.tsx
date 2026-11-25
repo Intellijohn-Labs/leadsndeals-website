@@ -23,12 +23,8 @@ export default function Preloader() {
   const grid = mobile ? { cols: 6, rows: 10 } : { cols: 12, rows: 7 };
 
   useEffect(() => {
-    // Phones: no intro (CSS already hides it) — hand over straight away so scrolling and the hero start now.
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      finishIntro();
-      setGone(true);
-      return;
-    }
+    // Phones get a quicker intro: shorter count, a lower cap on waiting, and a plain fade-out.
+    const phone = window.matchMedia("(max-width: 767px)").matches;
     let repeat = false;
     try {
       repeat = sessionStorage.getItem("lnd-intro") === "1";
@@ -36,16 +32,16 @@ export default function Preloader() {
     } catch {}
 
     const counter = { v: 0 };
-    const minDuration = reducedMotion ? 0.2 : repeat ? 0.6 : 1.7;
+    const minDuration = reducedMotion ? 0.2 : repeat ? 0.5 : phone ? 1 : 1.7;
     const fontsReady = document.fonts?.ready ?? Promise.resolve();
     const pageReady =
-      document.readyState === "complete"
+      phone || document.readyState === "complete" // phones only wait for fonts, not every image
         ? Promise.resolve()
         : new Promise<void>((r) => window.addEventListener("load", () => r(), { once: true }));
-    // Never hold visitors hostage: cap the wait for slow assets at 3.5 s.
+    // Never hold visitors hostage: cap the wait for slow assets (3.5 s desktop, 1.2 s phones).
     const ready = Promise.race([
       Promise.all([fontsReady, pageReady]),
-      new Promise((r) => setTimeout(r, 3500)),
+      new Promise((r) => setTimeout(r, phone ? 1200 : 3500)),
     ]);
 
     const ctx = gsap.context(() => {
@@ -74,8 +70,12 @@ export default function Preloader() {
           onUpdate: () => setCount(Math.round(counter.v)),
         });
         finish.to("[data-pl-center]", { autoAlpha: 0, y: -12, duration: 0.35, ease: "power2.in" }, "+=0.05");
-        finish.add(() => finishIntro());
-        if (reducedMotion) {
+        finish.add(() => {
+          finishIntro();
+          // Let taps and swipes through right away, even while the loader is fading out.
+          if (rootRef.current) rootRef.current.style.pointerEvents = "none";
+        });
+        if (reducedMotion || phone) {
           finish.to(rootRef.current, { autoAlpha: 0, duration: 0.3 });
         } else {
           finish.to(

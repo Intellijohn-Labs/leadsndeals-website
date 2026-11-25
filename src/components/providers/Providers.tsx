@@ -41,6 +41,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   // Smooth inertia scroll, driven by GSAP's ticker so ScrollTrigger never jitters.
   useEffect(() => {
     if (reducedMotion) return;
+    // Touch screens keep native scrolling: Lenis registers non-passive touch listeners, which make
+    // iOS wait for JavaScript on every swipe — the page felt frozen while the animations set up.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     const lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
     lenisRef.current = lenis;
     lenis.on("scroll", ScrollTrigger.update);
