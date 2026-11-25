@@ -147,7 +147,8 @@ export const assistant = {
   idle: { webm: "/assistant/ira-idle.webm" as string, mov: "" as string, handoffAt: 5.958 },
   greetingClip: { webm: "/assistant/ira-hi.webm" as string, mov: "" as string },
   // talking loop shown while Ira's voice is playing (not word-accurate lip-sync)
-  talk: { webm: "/assistant/ira-talk.webm" as string, mov: "" as string },
+  // Spoken replies are off, so the talking loop isn't loaded. Restore "/assistant/ira-talk.webm" if they return.
+  talk: { webm: "" as string, mov: "" as string },
 };
 
 export const faqs = [

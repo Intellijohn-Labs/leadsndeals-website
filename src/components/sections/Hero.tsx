@@ -9,6 +9,7 @@ import TextMask from "@/components/motion/TextMask";
 import ScrambleText from "@/components/motion/ScrambleText";
 import MagneticButton from "@/components/motion/MagneticButton";
 import ParticleSphere from "@/components/motion/ParticleSphere";
+import { useMedia } from "@/lib/useMedia";
 import { openAssistant, useApp } from "@/components/providers/Providers";
 import { InstagramIcon, MessengerIcon, N8nIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { assistant } from "@/config/site";
@@ -24,6 +25,7 @@ const chips = [
 
 export default function Hero() {
   const { introDone } = useApp();
+  const showSphere = useMedia("(min-width: 768px)");
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
 
@@ -171,9 +173,10 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={introDone ? { opacity: 1, scale: 1 } : undefined}
           transition={{ duration: 1.6, ease, delay: 0.2 }}
-          className="relative aspect-square w-full max-w-[620px] justify-self-center lg:col-span-5 lg:-mr-10"
+          className="relative hidden aspect-square w-full max-w-[620px] justify-self-center md:block lg:col-span-5 lg:-mr-10"
         >
-          <ParticleSphere />
+          {/* Phones skip the sphere entirely (it's hidden there, so don't even start it) */}
+          {showSphere && <ParticleSphere />}
           {chips.map((c, i) => (
             <div key={c.label} data-chip data-depth={c.depth} className={`pointer-events-none absolute ${c.pos}`}>
               <div data-chip-inner data-depth={c.depth}>

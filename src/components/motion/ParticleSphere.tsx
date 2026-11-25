@@ -2,6 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useApp } from "@/components/providers/Providers";
+
+// Pre-built colours (alpha in 24 steps) so the draw loop never builds strings per particle.
+const STEPS = 24;
+const WHITE = Array.from({ length: STEPS + 1 }, (_, i) => `rgba(244,243,238,${((i / STEPS) * 0.85).toFixed(3)})`);
+const YELLOW = Array.from({ length: STEPS + 1 }, (_, i) => `rgba(242,194,27,${(i / STEPS).toFixed(3)})`);
 
 /**
  * Effect 03 — 3D motion.
@@ -11,13 +17,20 @@ import { cn } from "@/lib/utils";
  */
 export default function ParticleSphere({ className, count = 1400 }: { className?: string; count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Don't animate behind the preloader: it competes with the intro for the first second.
+  const { introDone } = useApp();
+  const introRef = useRef(introDone);
+  introRef.current = introDone;
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isSmall = window.innerWidth < 768;
-    const n = isSmall ? Math.round(count * 0.55) : count;
+    // Phones (incl. 3x-density iPhones with 120 Hz screens) get fewer particles, a lower canvas
+    // resolution and a 60 fps cap — visually the same, a fraction of the work.
+    const touch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+    const n = touch ? Math.round(count * 0.45) : count;
+    const maxDpr = touch ? 1.5 : 1.75;
 
     // Fibonacci sphere + a few accent particles in brand yellow.
     const pts = new Float32Array(n * 3);
@@ -38,7 +51,7 @@ export default function ParticleSphere({ className, count = 1400 }: { className?
       h = 0,
       dpr = 1;
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
       w = canvas.clientWidth;
       h = canvas.clientHeight;
       canvas.width = Math.round(w * dpr);
@@ -96,9 +109,15 @@ export default function ParticleSphere({ className, count = 1400 }: { className?
     io.observe(canvas);
 
     let raf = 0;
-    const draw = () => {
+    let last = 0;
+    let drawnOnce = false;
+    const draw = (now = 0) => {
       raf = requestAnimationFrame(draw);
       if (!visible || document.hidden) return;
+      if (!introRef.current && drawnOnce) return; // one still frame until the preloader is gone
+      if (now - last < 15.5) return; // cap at ~60 fps (120 Hz screens would otherwise draw twice as often)
+      last = now;
+      drawnOnce = true;
 
       if (!dragging) {
         velY += (0.0022 - velY) * 0.02; // ease back to idle spin
@@ -152,8 +171,8 @@ export default function ParticleSphere({ className, count = 1400 }: { className?
 
         const depth = (1 - z2) / 2; // 0 back → 1 front
         const size = (accent[i] ? 2.1 : 1.35) * scale;
-        const alpha = 0.12 + depth * 0.78;
-        ctx.fillStyle = accent[i] ? `rgba(242,194,27,${alpha})` : `rgba(244,243,238,${alpha * 0.85})`;
+        const step = Math.max(0, Math.min(STEPS, Math.round((0.12 + depth * 0.78) * STEPS)));
+        ctx.fillStyle = accent[i] ? YELLOW[step] : WHITE[step];
         ctx.fillRect(sx - size / 2, sy - size / 2, size, size);
       }
     };
