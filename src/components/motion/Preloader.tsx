@@ -23,6 +23,12 @@ export default function Preloader() {
   const grid = mobile ? { cols: 6, rows: 10 } : { cols: 12, rows: 7 };
 
   useEffect(() => {
+    // Phones: no intro (CSS already hides it) — hand over straight away so scrolling and the hero start now.
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      finishIntro();
+      setGone(true);
+      return;
+    }
     let repeat = false;
     try {
       repeat = sessionStorage.getItem("lnd-intro") === "1";
