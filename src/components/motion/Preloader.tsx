@@ -35,14 +35,30 @@ export default function Preloader() {
     const minDuration = reducedMotion ? 0.2 : repeat ? 0.5 : phone ? 1 : 1.7;
     const fontsReady = document.fonts?.ready ?? Promise.resolve();
     const pageReady =
-      phone || document.readyState === "complete" // phones only wait for fonts, not every image
+      document.readyState === "complete"
         ? Promise.resolve()
         : new Promise<void>((r) => window.addEventListener("load", () => r(), { once: true }));
-    // Never hold visitors hostage: cap the wait for slow assets (3.5 s desktop, 1.2 s phones).
+    // "Settled": the browser has painted ~12 smooth frames in a row, i.e. all the section
+    // animations have finished setting up. Ending the loader before this left phones janky.
+    const settled = () =>
+      new Promise<void>((res) => {
+        let calm = 0;
+        let last = performance.now();
+        const tick = (t: number) => {
+          calm = t - last < 50 ? calm + 1 : 0;
+          last = t;
+          if (calm >= 8) res();
+          else requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    // Wait for the whole page (fonts, images, scripts) and a calm main thread — capped so a
+    // slow network never traps anyone (8 s phones, 6 s desktop).
     const ready = Promise.race([
-      Promise.all([fontsReady, pageReady]),
-      new Promise((r) => setTimeout(r, phone ? 1200 : 3500)),
+      Promise.all([fontsReady, pageReady]).then(settled),
+      new Promise((r) => setTimeout(r, phone ? 8000 : 6000)),
     ]);
+    let crawl: gsap.core.Tween | null = null;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ paused: true });
@@ -58,10 +74,15 @@ export default function Preloader() {
         { clipPath: "inset(0 0% 0 0)", duration: minDuration, ease: "power3.inOut" },
         0,
       );
+      // If the page is still loading when the first count ends, keep creeping towards 99.
+      tl.eventCallback("onComplete", () => {
+        crawl = gsap.to(counter, { v: 99, duration: 6, ease: "power1.out", onUpdate: () => setCount(Math.round(counter.v)) });
+      });
       tl.play();
 
       ready.then(async () => {
         await tl.then();
+        crawl?.kill();
         const finish = gsap.timeline();
         finish.to(counter, {
           v: 100,

@@ -326,7 +326,7 @@ export default function AssistantWidget() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   maxLength={1000}
-                  placeholder={dictation.listening ? "" : `Message ${assistant.name}…`}
+                  placeholder={dictation.listening ? "" : dictation.transcribing ? "Writing down what you said…" : `Message ${assistant.name}…`}
                   className={`h-10 min-w-0 flex-1 bg-transparent text-[15px] text-fg outline-none placeholder:text-fg/40 ${
                     dictation.listening && !input ? "pl-9" : ""
                   }`}
@@ -338,7 +338,7 @@ export default function AssistantWidget() {
                   <button
                     type="button"
                     onClick={() => dictation.setLang(dictation.lang === "ml-IN" ? "en-IN" : "ml-IN")}
-                    disabled={dictation.listening}
+                    disabled={dictation.listening || dictation.transcribing}
                     aria-label={dictation.lang === "ml-IN" ? "Voice language: Malayalam. Switch to English" : "Voice language: English. Switch to Malayalam"}
                     title={dictation.lang === "ml-IN" ? "Speaking Malayalam (tap for English)" : "Speaking English (tap for Malayalam)"}
                     className="h-7 shrink-0 rounded-lg border border-white/10 px-2 text-[12px] font-semibold text-fg/70 transition-colors hover:border-white/25 hover:text-fg disabled:opacity-40"
@@ -350,7 +350,7 @@ export default function AssistantWidget() {
                   <button
                     type="button"
                     onClick={() => (dictation.listening ? dictation.stop() : dictation.start())}
-                    disabled={busy}
+                    disabled={busy || dictation.transcribing}
                     aria-label={dictation.listening ? "Stop voice input" : "Speak your question"}
                     title={dictation.listening ? "Stop" : "Speak your question"}
                     className={`relative grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors disabled:opacity-40 ${
