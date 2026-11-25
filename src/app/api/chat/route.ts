@@ -5,7 +5,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // Prefer a project-specific key so a shell-level ANTHROPIC_API_KEY can't shadow it.
-const apiKey = process.env.LEADSNDEALS_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY;
+// Strip a stray BOM/whitespace (Windows shells can add one when the key is pasted into Vercel).
+const apiKey = (process.env.LEADSNDEALS_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY || "").replace(/^﻿/, "").trim() || undefined;
 const client = apiKey ? new Anthropic({ apiKey }) : null;
 
 const SYSTEM = `You are ${assistant.name}, the AI assistant on the website of ${site.legalName} ("${site.name}").

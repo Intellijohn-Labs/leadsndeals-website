@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "Please enter a valid email" }, { status: 400 });
   }
 
-  const hook = process.env.LEAD_WEBHOOK_URL;
+  const hook = process.env.LEAD_WEBHOOK_URL?.replace(/^﻿/, "").trim();
   if (!hook) {
     console.error("[lead] LEAD_WEBHOOK_URL is not set — lead NOT delivered:", lead);
     return Response.json({ ok: true, delivered: false });
