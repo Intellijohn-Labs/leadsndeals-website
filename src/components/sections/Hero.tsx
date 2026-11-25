@@ -88,9 +88,9 @@ export default function Hero() {
       {/* Background layer */}
       <div data-hero-bg aria-hidden="true" className="absolute inset-0 -z-10">
         <div className="grid-lines absolute inset-0" />
-        <div className="absolute left-[55%] top-[18%] h-[520px] w-[520px] rounded-full bg-brand/[0.13] blur-[140px]" />
-        <div className="absolute left-[72%] top-[48%] h-[420px] w-[420px] rounded-full bg-violet/[0.16] blur-[140px]" />
-        <div className="absolute -left-40 bottom-0 h-[360px] w-[360px] rounded-full bg-brand/[0.05] blur-[120px]" />
+        <div className="absolute left-[55%] top-[18%] h-[520px] w-[520px] rounded-full glow [--glow-color:rgb(242_194_27/0.13)]" />
+        <div className="absolute left-[72%] top-[48%] h-[420px] w-[420px] rounded-full glow [--glow-color:rgb(123_97_255/0.16)]" />
+        <div className="absolute -left-40 bottom-0 h-[360px] w-[360px] rounded-full glow [--glow-color:rgb(242_194_27/0.05)]" />
       </div>
 
       <div className="container-x grid items-center gap-10 lg:grid-cols-12">

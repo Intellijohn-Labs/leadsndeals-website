@@ -74,7 +74,7 @@ export default function Contact() {
       {/* Layered parallax scene */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <Parallax speed={0.9} className="absolute left-1/2 top-24 h-[620px] w-[920px] -translate-x-1/2">
-          <div className="h-full w-full rounded-full bg-brand/[0.12] blur-[150px]" />
+          <div className="h-full w-full rounded-full glow [--glow-color:rgb(242_194_27/0.12)]" />
         </Parallax>
         <Parallax speed={-0.6} className="absolute left-[8%] top-[14%] hidden md:block">
           <span className="grid h-16 w-16 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-wa">

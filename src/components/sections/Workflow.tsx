@@ -118,7 +118,7 @@ export default function Workflow() {
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10">
         <div className="grid-lines absolute inset-0 opacity-70" />
-        <div className="absolute left-1/2 top-1/2 h-[480px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet/[0.08] blur-[140px]" />
+        <div className="absolute left-1/2 top-1/2 h-[480px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full glow [--glow-color:rgb(123_97_255/0.08)]" />
       </div>
 
       <div className="container-x flex h-full flex-col py-24 lg:pb-12 lg:pt-[calc(var(--nav-h)+28px)]">

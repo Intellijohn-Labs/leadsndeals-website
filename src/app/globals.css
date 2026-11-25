@@ -109,6 +109,27 @@ section[id] {
   color-scheme: light;
 }
 
+/* Soft colour glow drawn with a gradient instead of filter: blur() — looks the same, but costs
+   almost nothing to paint (big blur filters were stalling animations on 3x iPhone screens). */
+.glow {
+  background: radial-gradient(closest-side, var(--glow-color), transparent);
+  scale: 1.6;
+  pointer-events: none;
+}
+
+/* Phones: drop the costliest effects (blend-mode grain, backdrop blur) — they force the GPU to
+   recomposite everything underneath on every animation frame. */
+@media (max-width: 767px), (hover: none) {
+  .grain::after {
+    display: none;
+  }
+  .glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(16, 16, 18, 0.94) !important;
+  }
+}
+
 /* Subtle film grain for depth */
 .grain::after {
   content: "";

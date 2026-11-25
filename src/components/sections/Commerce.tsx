@@ -162,8 +162,8 @@ export default function Commerce() {
   return (
     <section id="commerce" data-section="E-commerce" className="relative isolate overflow-hidden py-28 sm:py-36">
       <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <div className="absolute left-[10%] top-[20%] h-[420px] w-[420px] rounded-full bg-wa/[0.07] blur-[130px]" />
-        <div className="absolute right-[5%] bottom-[10%] h-[420px] w-[420px] rounded-full bg-brand/[0.08] blur-[130px]" />
+        <div className="absolute left-[10%] top-[20%] h-[420px] w-[420px] rounded-full glow [--glow-color:rgb(37_211_102/0.07)]" />
+        <div className="absolute right-[5%] bottom-[10%] h-[420px] w-[420px] rounded-full glow [--glow-color:rgb(242_194_27/0.08)]" />
       </div>
 
       <div className="container-x grid items-center gap-16 lg:grid-cols-2">

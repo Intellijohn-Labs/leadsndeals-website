@@ -136,8 +136,8 @@ export default function VoiceShowcase() {
   return (
     <section id="voice" data-section="Voice AI" className="paper relative isolate overflow-hidden py-28 sm:py-36">
       <div aria-hidden="true" className="grid-lines absolute inset-0 -z-10 opacity-80" />
-      <Parallax speed={0.6} className="absolute -right-32 top-10 -z-10 h-[420px] w-[420px] rounded-full bg-brand/30 blur-[120px]" />
-      <Parallax speed={-0.4} className="absolute -left-20 bottom-0 -z-10 h-[340px] w-[340px] rounded-full bg-violet/15 blur-[120px]" />
+      <Parallax speed={0.6} className="absolute -right-32 top-10 -z-10 h-[420px] w-[420px] rounded-full glow [--glow-color:rgb(242_194_27/0.3)]" />
+      <Parallax speed={-0.4} className="absolute -left-20 bottom-0 -z-10 h-[340px] w-[340px] rounded-full glow [--glow-color:rgb(123_97_255/0.15)]" />
 
       <div className="container-x grid items-center gap-16 lg:grid-cols-2">
         <div>

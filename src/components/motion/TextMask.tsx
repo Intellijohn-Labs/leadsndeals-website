@@ -46,7 +46,7 @@ export default function TextMask({
       {lines.map((line, i) => (
         <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
           <motion.span
-            className={cn("block will-change-transform", lineClassName)}
+            className={cn("block", lineClassName)}
             variants={{
               hidden: { y: "112%", rotate: 2 },
               show: { y: "0%", rotate: 0, transition: { duration: 1.05, ease } },
