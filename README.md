@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Leadsndeals — company website
 
-## Getting Started
+Next.js 16 (App Router) · Tailwind CSS v4 · GSAP + ScrollTrigger · Lenis · Motion · Claude (website assistant).
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in the values
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Before going live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Contact details** — fill the `TODO`s in `src/config/site.ts` (WhatsApp number, phone, email, socials, domain).
+   Empty values simply hide their buttons.
+2. **AI assistant (Ira)** — set `LEADSNDEALS_ANTHROPIC_API_KEY` (her answers, Claude) and `GEMINI_API_KEY`
+   (her voice, Gemini TTS) in `.env.local` / Vercel. Without them the widget falls back to text / the form.
+3. **Leads** — set `LEAD_WEBHOOK_URL` (e.g. an n8n webhook → CRM/Sheet + WhatsApp alert). Without it,
+   form submissions are only logged on the server.
+4. **Presenter avatar** — to replace the animated orb with a real presenter (ClaimsLens style), add your own
+   files to `public/assistant/` and set `portrait` / `idleVideo` / `greetingVideo` in `src/config/site.ts`.
+   Use media you own the rights to.
+5. **Logo** — `public/brand/*.png` were extracted from a JPG. Swap in an SVG/PNG export of the original logo for sharper edges.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Where things live
 
-## Learn More
+| Path | What |
+| --- | --- |
+| `src/config/site.ts` | Company info, services, FAQ, assistant settings — edit content here |
+| `src/components/sections/*` | Page sections in order (see `src/app/page.tsx`) |
+| `src/components/motion/*` | Reusable effects: Preloader, PixelReveal, MagneticButton, TextMask, ScrambleText, ScrollWordReveal, Parallax, ParticleSphere |
+| `src/components/assistant/*` | Ira widget, presenter, orb |
+| `src/app/api/chat` | Claude chat endpoint (streams plain text) |
+| `src/app/api/lead` | Demo-form endpoint → `LEAD_WEBHOOK_URL` |
 
-To learn more about Next.js, take a look at the following resources:
+## Effects (from shakirc.com/animations)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hover cards (Industries deck, service cards) · smooth loader · 3D particle sphere · pixel entrance reveal ·
+magnet + pulse buttons · layered parallax · card fan on scroll · masked headlines · text decrypt · text reveal on scroll.
+All respect `prefers-reduced-motion`.
