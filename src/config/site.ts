@@ -41,7 +41,9 @@ export type ServiceKey =
   | "sms"
   | "ecommerce"
   | "n8n"
-  | "web";
+  | "crm"
+  | "web"
+  | "app";
 
 export interface Service {
   key: ServiceKey;
@@ -111,6 +113,14 @@ export const services: Service[] = [
     points: ["CRM & Sheets sync", "Payment webhooks", "AI agents"],
   },
   {
+    key: "crm",
+    title: "CRM Integrations",
+    short: "Every lead lands in your CRM — none lost or typed twice.",
+    description:
+      "Leads from your website, WhatsApp, forms and ads flow straight into your CRM, with automatic follow-ups so nobody slips through.",
+    points: ["All channels → one CRM", "Automatic follow-ups", "No double entry"],
+  },
+  {
     key: "web",
     title: "Web Development",
     short: "Fast websites and web apps built to convert.",
@@ -118,7 +128,83 @@ export const services: Service[] = [
       "High-performance websites and web apps designed to convert — and wired straight into your chatbots and workflows.",
     points: ["Websites & landing pages", "Web apps & portals", "SEO-ready"],
   },
+  {
+    key: "app",
+    title: "Mobile App Development",
+    short: "Android and iOS apps your customers keep on their phones.",
+    description:
+      "Custom Android and iOS apps for bookings, orders and loyalty, with push notifications and an admin panel for your team.",
+    points: ["Android & iOS", "Bookings, orders & loyalty", "Push notifications"],
+  },
 ];
+
+/* ---------- Pricing (from the Leadsndeals × WAAU brochure; INR, 18% GST extra) ---------- */
+
+export const chatbotPlans = [
+  {
+    tier: "Starter",
+    name: "Bot Creator & Bulk Messaging",
+    blurb: "Your first chatbot plus broadcasts",
+    price: 999,
+    features: [
+      "Drag-and-drop bot flow builder, running 24/7",
+      "Live chat inbox for your team, bot hands over to a human",
+      "Bulk broadcasts with images, PDFs and buttons — see who read them",
+    ],
+  },
+  {
+    tier: "Most popular",
+    name: "Advance Bot Builder & Bulk Messaging",
+    blurb: "AI voice replies, API & CRM, multi-language",
+    price: 2999,
+    popular: true,
+    features: [
+      "Everything in Starter",
+      "AI replies to customer voice notes, in their language",
+      "API & CRM integrations, multi-language",
+      "WhatsApp product catalog",
+    ],
+  },
+  {
+    tier: "Complete package",
+    name: "Premium Bot Builder & Messaging",
+    blurb: "Instagram, Facebook, Webchat, payments, 24/7 support",
+    price: 4999,
+    features: [
+      "Everything in Advance",
+      "Instagram, Facebook and website chat — one bot for every channel",
+      "Payment links in chat, e-commerce order flows",
+      "24/7 priority support",
+    ],
+  },
+];
+
+export const chatbotNotes = [
+  "1,000 free service messages every month",
+  "Prices per month in INR, 18% GST extra",
+  "WhatsApp message charges follow Meta's rates and may change",
+  "AI chatbot usage has a separate AI charge",
+  "WhatsApp Business API setup and approved templates required",
+];
+
+export const smsPackages = [
+  { qty: 50000, rate: 0.15 },
+  { qty: 100000, rate: 0.14 },
+  { qty: 200000, rate: 0.13 },
+  { qty: 500000, rate: 0.12 },
+].map((p) => {
+  const basic = Math.round(p.qty * p.rate);
+  const gst = Math.round(basic * 0.18);
+  return { ...p, basic, gst, total: basic + gst };
+});
+
+export const smsNotes = [
+  "Charges apply only to successfully delivered SMS",
+  "40% of undelivered SMS are credited back to your account",
+  "24×7 service and support, with monthly delivery reports",
+];
+
+export const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
 
 export const assistant = {
   name: "Ira",
@@ -174,6 +260,6 @@ export const faqs = [
   },
   {
     q: "How is pricing worked out?",
-    a: "It depends on the channels, message volume and integrations you need. Book a free demo and we'll recommend a setup and send a clear quote.",
+    a: "WhatsApp chatbot plans start at ₹999/month (₹2,999 and ₹4,999 plans add AI voice replies, CRM, Instagram, Facebook, webchat and payments). Direct SMS starts at ₹0.15 per SMS. All prices are + 18% GST — see the Pricing section. Websites, apps, CRM and custom workflows are quoted after a free demo.",
   },
 ] as const;

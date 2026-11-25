@@ -11,6 +11,7 @@ import Commerce from "@/components/sections/Commerce";
 import Industries from "@/components/sections/Industries";
 import Process from "@/components/sections/Process";
 import Faq from "@/components/sections/Faq";
+import Pricing from "@/components/sections/Pricing";
 import Contact from "@/components/sections/Contact";
 import AssistantWidget from "@/components/assistant/AssistantWidget";
 
@@ -40,6 +41,7 @@ export default function Home() {
         <Commerce />
         <Industries />
         <Process />
+        <Pricing />
         <Faq />
         <Contact />
       </main>

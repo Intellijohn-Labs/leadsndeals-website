@@ -1,4 +1,4 @@
-import { CodeXml, Globe, PhoneCall, ShoppingBag, MessageSquareText } from "lucide-react";
+import { CodeXml, Globe, PhoneCall, ShoppingBag, MessageSquareText, Smartphone, DatabaseZap } from "lucide-react";
 import type { ServiceKey } from "@/config/site";
 import { InstagramIcon, N8nIcon, WhatsAppIcon } from "./BrandIcons";
 
@@ -20,5 +20,9 @@ export default function ServiceIcon({ k, className }: { k: ServiceKey; className
       return <N8nIcon className={className} />;
     case "web":
       return <CodeXml className={className} strokeWidth={1.8} />;
+    case "crm":
+      return <DatabaseZap className={className} strokeWidth={1.8} />;
+    case "app":
+      return <Smartphone className={className} strokeWidth={1.8} />;
   }
 }

@@ -15,6 +15,7 @@ const links = [
   { label: "How it works", href: "#workflow" },
   { label: "Voice AI", href: "#voice" },
   { label: "E-commerce", href: "#commerce" },
+  { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
 

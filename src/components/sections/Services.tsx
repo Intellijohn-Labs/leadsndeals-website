@@ -98,10 +98,12 @@ export default function Services() {
       const n = cards.length;
       const mid = (n - 1) / 2;
       const gap = 18;
+      const cols = n > 8 ? 5 : 4; // 10 services → 5 × 2 grid
+      const rows = Math.ceil(n / cols);
 
       const size = () => {
-        const W = Math.min(300, (stage.clientWidth - gap * 3) / 4);
-        const H = Math.min(W * 1.2, (stage.clientHeight - gap) / 2);
+        const W = Math.min(300, (stage.clientWidth - gap * (cols - 1)) / cols);
+        const H = Math.min(W * 1.2, (stage.clientHeight - gap * (rows - 1)) / rows);
         return { W, H };
       };
       const applySize = () => {
@@ -143,8 +145,8 @@ export default function Services() {
       })
         .to({}, { duration: 0.25 })
         .to(cards, {
-          x: (i) => ((i % 4) - 1.5) * (size().W + gap),
-          y: (i) => (Math.floor(i / 4) - 0.5) * (size().H + gap),
+          x: (i) => ((i % cols) - (cols - 1) / 2) * (size().W + gap),
+          y: (i) => (Math.floor(i / cols) - (rows - 1) / 2) * (size().H + gap),
           rotate: 0,
           duration: 1.2,
           ease: "power3.inOut",
@@ -172,16 +174,18 @@ export default function Services() {
       const stage = stageRef.current!;
       const cards = gsap.utils.toArray<HTMLElement>("[data-fan-card]", stage);
       const gap = 18;
-      const W = Math.min(300, (stage.clientWidth - gap * 3) / 4);
-      const H = Math.min(W * 1.16, (stage.clientHeight - gap) / 2);
+      const cols = cards.length > 8 ? 5 : 4;
+      const rows = Math.ceil(cards.length / cols);
+      const W = Math.min(300, (stage.clientWidth - gap * (cols - 1)) / cols);
+      const H = Math.min(W * 1.16, (stage.clientHeight - gap * (rows - 1)) / rows);
       cards.forEach((c, i) => {
         c.style.width = `${W}px`;
         c.style.height = `${H}px`;
         gsap.set(c, {
           xPercent: -50,
           yPercent: -50,
-          x: ((i % 4) - 1.5) * (W + gap),
-          y: (Math.floor(i / 4) - 0.5) * (H + gap),
+          x: ((i % cols) - (cols - 1) / 2) * (W + gap),
+          y: (Math.floor(i / cols) - (rows - 1) / 2) * (H + gap),
         });
       });
     });
@@ -203,7 +207,7 @@ export default function Services() {
               className="display text-[clamp(38px,5.6vw,76px)]"
               lines={[
                 <>
-                  Eight ways to <span className="serif-accent text-brand">never</span>
+                  Ten ways to <span className="serif-accent text-brand">never</span>
                 </>,
                 "miss a customer.",
               ]}
