@@ -39,18 +39,6 @@ const brands: Brand[] = [
       </span>
     ),
   },
-  {
-    name: "Web & Apps",
-    what: "Websites, web apps and Android / iOS apps, connected to your chatbots, CRM and payments.",
-    url: "#contact",
-    domain: "leadsndeals.com",
-    logo: (
-      <span className="flex items-center gap-2.5">
-        <Image src="/brands/ln-icon.webp" alt="" width={96} height={96} className="h-10 w-10 rounded-xl" />
-        <span className="text-[24px] font-bold tracking-tight text-paper-ink">Web &amp; Apps</span>
-      </span>
-    ),
-  },
 ];
 
 /** Our brands: the Leadsndeals product family, with each product's own logo. */
@@ -59,13 +47,13 @@ export default function Brands() {
     <section id="brands" data-section="Our brands" className="relative bg-paper py-24 text-paper-ink sm:py-32">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <TextMask className="display text-[clamp(36px,5vw,64px)]" lines={["One company.", "Four ways to grow."]} />
+          <TextMask className="display text-[clamp(36px,5vw,64px)]" lines={["One company.", "Three ways to grow."]} />
           <p className="max-w-[380px] text-[15.5px] leading-relaxed text-paper-muted">
             Leadsndeals Intelligent Automations helps businesses reach customers on every channel, through our own products.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {brands.map((b) => {
             const flagship = b.badge === "Flagship";
             const inner = (

@@ -18,7 +18,7 @@ ${services
   .map((s) => `- ${s.title}${s.status === "coming-soon" ? " (COMING SOON — calling is not live yet; offer early access)" : ""}: ${s.description}`)
   .join("\n")}
 
-Our brands (products of ${site.legalName}): WAAU (waau.in, our flagship AI WhatsApp automation platform), DirectSMS (directsms.in, bulk and transactional SMS), CallCall.in (callcall.in, automated voice calls, coming soon) and Web & Apps (websites and mobile apps).
+Our brands (products of ${site.legalName}): WAAU (waau.in, our flagship AI WhatsApp automation platform), DirectSMS (directsms.in, bulk and transactional SMS), and CallCall.in (callcall.in, automated voice calls, coming soon). Websites and mobile apps are also built by the Leadsndeals team.
 
 Pricing (INR; quote these exact numbers when asked):
 WhatsApp chatbot plans (per month, + 18% GST):
