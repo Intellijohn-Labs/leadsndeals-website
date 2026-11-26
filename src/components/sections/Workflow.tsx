@@ -47,16 +47,23 @@ export default function Workflow() {
   const pathRef = useRef<SVGPathElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const [nodes, setNodes] = useState<{ x: number; y: number }[]>([]);
+  const nodesRef = useRef<{ x: number; y: number }[]>([]);
+  nodesRef.current = nodes;
   const [active, setActive] = useState(-1);
 
-  // Place nodes on the curve (viewBox → % so it scales with the box).
+  // Place nodes on the curve at EVENLY SPACED x positions (viewBox → % so it scales with the box).
+  // Spacing them by curve length bunched steps together where the curve is steep, so labels overlapped.
   useEffect(() => {
     const p = pathRef.current;
     if (!p) return;
     const L = p.getTotalLength();
+    // sample the curve once, then pick the point closest to each target x
+    const samples = Array.from({ length: 400 }, (_, k) => p.getPointAtLength((L * k) / 399));
+    // centre of 5 equal columns: 10%, 30%, 50%, 70%, 90%
+    const xs = steps.map((_, i) => 1200 * ((i + 0.5) / steps.length));
     setNodes(
-      steps.map((_, i) => {
-        const pt = p.getPointAtLength((L * i) / (steps.length - 1));
+      xs.map((tx) => {
+        const pt = samples.reduce((best, s) => (Math.abs(s.x - tx) < Math.abs(best.x - tx) ? s : best), samples[0]);
         return { x: (pt.x / 1200) * 100, y: (pt.y / 420) * 100 };
       }),
     );
@@ -86,7 +93,10 @@ export default function Workflow() {
             dotRef.current.style.left = `${(pt.x / 1200) * 100}%`;
             dotRef.current.style.top = `${(pt.y / 420) * 100}%`;
           }
-          setActive(Math.floor(st.v * (steps.length - 1) + 0.04));
+          // light up every step the moving dot has reached (by x position)
+          const dx = (pt.x / 1200) * 100;
+          const ns = nodesRef.current;
+          setActive(ns.length ? ns.filter((n) => n.x <= dx + 0.6).length - 1 : Math.floor(st.v * (steps.length - 1) + 0.04));
         },
       });
       return () => tween.scrollTrigger?.kill();
@@ -188,8 +198,8 @@ export default function Workflow() {
                 />
                 <div
                   className={cn(
-                    "absolute top-[66%] w-[min(220px,19%)] transition-all duration-700",
-                    i === 0 ? "translate-x-[-22px]" : i === steps.length - 1 ? "-translate-x-[calc(100%-22px)]" : "-translate-x-1/2",
+                    // each label is centred in its own 20% column, so labels can never overlap
+                    "absolute top-[66%] w-[calc(20%-24px)] -translate-x-1/2 transition-all duration-700",
                     on ? "opacity-100" : "opacity-25",
                   )}
                   style={{ left: `${n.x}%` }}
