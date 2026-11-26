@@ -18,7 +18,20 @@ export const site = {
     /** Call numbers shown in the contact section and footer. */
     phones: ["+91 99617 74455", "+91 80864 95777"],
     email: "mail@leadsndeals.com",
-    address: "", // TODO: city / office address
+    address: "Ground Floor, 1/57, Kuthiyathodu, Kunnukara, Ernakulam, Kerala 683578",
+  },
+
+  /** From the GST registration. */
+  legal: {
+    tradeName: "Leadsndeals Intelligent Automations",
+    owner: "Justin Johny",
+    constitution: "Proprietorship",
+    street: "Ground Floor, 1/57, Kuthiyathodu",
+    locality: "Kunnukara",
+    district: "Ernakulam",
+    state: "Kerala",
+    pin: "683578",
+    effective: "26 November 2026",
   },
 
   social: {
@@ -232,8 +245,8 @@ export const assistant = {
   portrait: "/assistant/ira.webp" as string,
   // handoffAt: the idle frame (seconds) that best matches the greeting's last frame — where idle resumes after greeting
   idle: { webm: "/assistant/ira-idle.webm" as string, mov: "" as string, handoffAt: 5.958 },
-  // The recorded greeting says the old name ("Ira"), so it's off. Add a new clip here if one is made for Lia.
-  greetingClip: { webm: "" as string, mov: "" as string },
+  // Same greeting video as before with a new Gemini TTS (voice Kore) track: "Hi! I'm Lia from Leadsndeals…"
+  greetingClip: { webm: "/assistant/lia-hi.webm" as string, mov: "" as string },
   // talking loop shown while Ira's voice is playing (not word-accurate lip-sync)
   // Spoken replies are off, so the talking loop isn't loaded. Restore "/assistant/ira-talk.webm" if they return.
   talk: { webm: "" as string, mov: "" as string },

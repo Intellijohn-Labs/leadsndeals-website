@@ -197,7 +197,13 @@ export default function Contact() {
                     <textarea name="message" rows={3} maxLength={1500} placeholder="A sentence or two is plenty" className={`${input} resize-none`} />
                   </label>
                   <div className="flex flex-col items-start gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-[12.5px] text-paper-muted">We&apos;ll only use your details to contact you about this request.</p>
+                    <p className="text-[12.5px] text-paper-muted">
+                      By submitting, you agree to be contacted about this request. See our{" "}
+                      <a href="/privacy" className="underline hover:text-ink">
+                        Privacy Policy
+                      </a>
+                      .
+                    </p>
                     <MagneticButton type="submit" variant="dark" pulse={false} disabled={status === "sending"}>
                       {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                       Request demo <ArrowRight className="h-4 w-4" />

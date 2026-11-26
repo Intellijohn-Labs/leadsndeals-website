@@ -77,6 +77,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   logo: `${site.url}/brand/logo.png`,
                   email: site.contact.email,
                   telephone: site.contact.phones,
+                  founder: { "@type": "Person", name: site.legal.owner },
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: site.legal.street,
+                    addressLocality: site.legal.locality,
+                    addressRegion: site.legal.state,
+                    postalCode: site.legal.pin,
+                    addressCountry: "IN",
+                  },
                   description: site.description,
                 },
                 ...services.map((s) => ({
