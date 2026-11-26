@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowUpRight } from "lucide-react";
-import { services, type Service } from "@/config/site";
+import { services, type Service, type ServiceKey } from "@/config/site";
+import ServiceModal from "./ServiceModal";
 import ServiceIcon from "@/components/ui/ServiceIcon";
 import TextMask from "@/components/motion/TextMask";
-import { openAssistant } from "@/components/providers/Providers";
 import { cn } from "@/lib/utils";
 
 const tone: Record<string, string> = {
@@ -14,14 +14,19 @@ const tone: Record<string, string> = {
   ecommerce: "bg-paper text-paper-ink border-paper",
 };
 
-function Card({ s, i }: { s: Service; i: number }) {
+function Card({ s, i, onOpen }: { s: Service; i: number; onOpen: (k: Service["key"]) => void }) {
   const t = tone[s.key];
   const light = Boolean(t);
   return (
     <article
+      role="button"
+      tabIndex={0}
+      aria-label={`${s.title}: view details`}
+      onClick={() => onOpen(s.key)}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onOpen(s.key))}
       className={cn(
         // svc-card = size container: details hide automatically when the card gets short (see globals.css)
-        "svc-card group/card relative flex h-full flex-col overflow-hidden rounded-[22px] border p-6 transition-[transform,box-shadow] duration-500 ease-[var(--ease-expo)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75)]",
+        "svc-card group/card relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[22px] border p-6 transition-[transform,box-shadow] duration-500 ease-[var(--ease-expo)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75)]",
         t ?? "border-white/[0.09] bg-ink-3 text-fg",
       )}
     >
@@ -63,16 +68,15 @@ function Card({ s, i }: { s: Service; i: number }) {
         ))}
       </ul>
 
-      <button
-        onClick={() => openAssistant(`Tell me about your ${s.title} service.`)}
+      <span
         className={cn(
           "mt-5 inline-flex items-center gap-1.5 self-start text-[13px] font-medium",
-          light ? "text-ink" : "text-fg/80 hover:text-fg",
+          light ? "text-ink" : "text-fg/80 group-hover/card:text-fg",
         )}
       >
-        <span className="tactile">Ask about this</span>
+        <span className="tactile">View details</span>
         <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5" />
-      </button>
+      </span>
       </div>
     </article>
   );
@@ -88,6 +92,7 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
+  const [openKey, setOpenKey] = useState<ServiceKey | null>(null);
 
   useEffect(() => {
     const mm = gsap.matchMedia();
@@ -221,7 +226,7 @@ export default function Services() {
           <div ref={stageRef} className="relative h-full">
             {services.map((s, i) => (
               <div key={s.key} data-fan-card className="absolute left-1/2 top-1/2 will-change-transform">
-                <Card s={s} i={i} />
+                <Card s={s} i={i} onOpen={setOpenKey} />
               </div>
             ))}
           </div>
@@ -234,12 +239,13 @@ export default function Services() {
         >
           {services.map((s, i) => (
             <div key={s.key} className="h-[340px] w-[78vw] max-w-[320px] shrink-0 snap-center">
-              <Card s={s} i={i} />
+              <Card s={s} i={i} onOpen={setOpenKey} />
             </div>
           ))}
         </div>
         <p className="text-[13px] text-muted lg:hidden">Swipe to see all {services.length} services →</p>
       </div>
+      <ServiceModal k={openKey} onClose={() => setOpenKey(null)} />
     </section>
   );
 }
