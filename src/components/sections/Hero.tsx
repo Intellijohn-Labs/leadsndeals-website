@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { ArrowRight, CreditCard, MessageSquareText } from "lucide-react";
 import TextMask from "@/components/motion/TextMask";
 import MagneticButton from "@/components/motion/MagneticButton";
+import WaveLines from "@/components/motion/WaveLines";
 import { useApp } from "@/components/providers/Providers";
 import { InstagramIcon, MessengerIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { whatsappLink } from "@/config/site";
@@ -16,8 +17,18 @@ export default function Hero() {
   const wa = whatsappLink();
 
   return (
-    <section id="top" data-section="Hero" className="relative flex min-h-[100svh] items-center pb-16 pt-28 sm:pt-32">
-      <div className="container-x grid items-center gap-12 lg:grid-cols-12">
+    <section id="top" data-section="Hero" className="relative isolate flex min-h-[100svh] items-center overflow-hidden pb-16 pt-28 sm:pt-32">
+      {/* Flowing wave ribbon behind the content; fades out at the edges and top/bottom */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={introDone ? { opacity: 1 } : undefined}
+        transition={{ duration: 1.6, delay: 0.3 }}
+        className="pointer-events-none absolute inset-x-0 bottom-[4%] -z-10 h-[300px] sm:bottom-[8%] sm:h-[400px] [mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent),linear-gradient(180deg,transparent,#000_25%,#000_75%,transparent)] [mask-composite:intersect] [-webkit-mask-composite:source-in]"
+      >
+        <WaveLines />
+      </motion.div>
+      <div className="container-x relative grid items-center gap-12 lg:grid-cols-12">
         <div className="relative z-10 lg:col-span-7">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
