@@ -10,6 +10,7 @@ import { useApp } from "@/components/providers/Providers";
 import { InstagramIcon, MessengerIcon, N8nIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { services, site, whatsappLink } from "@/config/site";
 import SlotPicker, { type Slot } from "./SlotPicker";
+import PhoneField from "./PhoneField";
 
 /** Pre-select a service in the form and scroll to it, from anywhere on the page. */
 export function prefillContact(service: string) {
@@ -168,10 +169,10 @@ export default function Contact() {
                     <span className="eyebrow mb-2 block text-paper-muted">Name *</span>
                     <input name="name" required maxLength={80} autoComplete="name" placeholder="Your name" className={input} />
                   </label>
-                  <label className="sm:col-span-1">
+                  <div className="sm:col-span-1">
                     <span className="eyebrow mb-2 block text-paper-muted">WhatsApp / phone *</span>
-                    <input name="phone" required type="tel" maxLength={20} autoComplete="tel" placeholder="+91" className={input} />
-                  </label>
+                    <PhoneField name="phone" inputClass={input} />
+                  </div>
                   <label className="sm:col-span-1">
                     <span className="eyebrow mb-2 block text-paper-muted">Email</span>
                     <input name="email" type="email" maxLength={120} autoComplete="email" placeholder="you@company.com" className={input} />
