@@ -95,16 +95,16 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={introDone ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 1, ease, delay: 0.35 }}
-          className="w-full max-w-[300px] justify-self-center sm:max-w-[380px] lg:col-span-5 lg:max-w-[480px] lg:justify-self-end"
+          className="w-full max-w-[220px] justify-self-center sm:max-w-[270px] lg:col-span-5 lg:max-w-[330px] lg:justify-self-center"
         >
           <Image
-            src="/hero/banner.webp"
+            src="/hero/banner-phone.webp"
             alt="Smartphone showing a business chat with a confirmed payment"
-            width={928}
-            height={1152}
+            width={528}
+            height={851}
             priority
-            sizes="(min-width: 1024px) 480px, (min-width: 640px) 380px, 300px"
-            className="h-auto w-full [mask-image:radial-gradient(ellipse_58%_60%_at_50%_47%,#000_50%,transparent_100%)]"
+            sizes="(min-width: 1024px) 330px, (min-width: 640px) 270px, 220px"
+            className="h-auto w-full drop-shadow-[0_40px_70px_rgba(242,194,27,0.12)]"
           />
         </motion.div>
       </div>
