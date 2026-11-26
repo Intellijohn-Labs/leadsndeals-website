@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
-import { ArrowRight, Check, CreditCard, MessageSquareText } from "lucide-react";
+import { ArrowRight, CreditCard, MessageSquareText } from "lucide-react";
 import TextMask from "@/components/motion/TextMask";
 import MagneticButton from "@/components/motion/MagneticButton";
 import { useApp } from "@/components/providers/Providers";
@@ -9,15 +10,6 @@ import { InstagramIcon, MessengerIcon, WhatsAppIcon } from "@/components/ui/Bran
 import { whatsappLink } from "@/config/site";
 
 const ease = [0.16, 1, 0.3, 1] as const;
-
-/** A plain, realistic example of what a Leadsndeals WhatsApp assistant does (clearly labelled as an example). */
-const chat: { from: "customer" | "bot" | "system"; text: string }[] = [
-  { from: "customer", text: "Hi, do you deliver cakes to Kakkanad?" },
-  { from: "bot", text: "Yes, we do. Delivery is free on orders above ₹500. Would you like to see today's cakes?" },
-  { from: "customer", text: "1 kg chocolate cake for Saturday, please" },
-  { from: "bot", text: "Done. Here's your UPI payment link. Your order is confirmed as soon as it's paid." },
-  { from: "system", text: "Lead saved to CRM · Team notified" },
-];
 
 export default function Hero() {
   const { introDone } = useApp();
@@ -98,49 +90,23 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Product visual: an example WhatsApp conversation (desktop / tablet) */}
-        <motion.figure
+        {/* Banner visual (Gemini-generated product shot in the brand colours; edges fade into the page) */}
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={introDone ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 1, ease, delay: 0.35 }}
-          className="hidden w-full max-w-[420px] justify-self-center md:block lg:col-span-5 lg:justify-self-end"
+          className="w-full max-w-[300px] justify-self-center sm:max-w-[380px] lg:col-span-5 lg:max-w-[480px] lg:justify-self-end"
         >
-          <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#0e1512] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]">
-            <div className="flex items-center gap-3 border-b border-white/[0.06] bg-[#16211c] px-4 py-3">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-wa/15 text-wa">
-                <WhatsAppIcon className="h-[18px] w-[18px]" />
-              </span>
-              <div className="leading-tight">
-                <div className="text-[14px] font-semibold text-fg">Your business</div>
-                <div className="text-[12px] text-fg/55">Replies instantly</div>
-              </div>
-            </div>
-            <div className="space-y-2.5 px-4 py-5">
-              {chat.map((m, i) =>
-                m.from === "system" ? (
-                  <div key={i} className="flex justify-center pt-1">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-3 py-1 text-[12px] text-fg/70">
-                      <Check className="h-3.5 w-3.5 text-wa" /> {m.text}
-                    </span>
-                  </div>
-                ) : (
-                  <div key={i} className={m.from === "customer" ? "flex justify-end" : "flex justify-start"}>
-                    <p
-                      className={
-                        m.from === "customer"
-                          ? "max-w-[80%] rounded-2xl rounded-br-md bg-[#1f5c45] px-3.5 py-2 text-[14px] leading-snug text-fg"
-                          : "max-w-[80%] rounded-2xl rounded-bl-md bg-white/[0.07] px-3.5 py-2 text-[14px] leading-snug text-fg/90"
-                      }
-                    >
-                      {m.text}
-                    </p>
-                  </div>
-                ),
-              )}
-            </div>
-          </div>
-          <figcaption className="mt-3 text-center text-[12.5px] text-muted">Example conversation</figcaption>
-        </motion.figure>
+          <Image
+            src="/hero/banner.webp"
+            alt="Smartphone showing a business chat with a confirmed payment"
+            width={928}
+            height={1152}
+            priority
+            sizes="(min-width: 1024px) 480px, (min-width: 640px) 380px, 300px"
+            className="h-auto w-full [mask-image:radial-gradient(ellipse_58%_60%_at_50%_47%,#000_50%,transparent_100%)]"
+          />
+        </motion.div>
       </div>
     </section>
   );
