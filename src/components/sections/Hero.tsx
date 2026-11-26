@@ -17,14 +17,18 @@ export default function Hero() {
   const wa = whatsappLink();
 
   return (
-    <section id="top" data-section="Hero" className="relative isolate flex min-h-[100svh] items-center overflow-hidden pb-16 pt-28 sm:pt-32">
+    <section
+      id="top"
+      data-section="Hero"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden pb-16 pt-28 sm:pt-32 lg:pb-10 lg:pt-[max(96px,11svh)]"
+    >
       {/* Flowing wave ribbon behind the content; fades out at the edges and top/bottom */}
       <motion.div
         aria-hidden="true"
         initial={{ opacity: 0 }}
         animate={introDone ? { opacity: 1 } : undefined}
         transition={{ duration: 1.6, delay: 0.3 }}
-        className="pointer-events-none absolute inset-x-0 bottom-[4%] -z-10 h-[300px] sm:bottom-[8%] sm:h-[400px] [mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent),linear-gradient(180deg,transparent,#000_25%,#000_75%,transparent)] [mask-composite:intersect] [-webkit-mask-composite:source-in]"
+        className="pointer-events-none absolute inset-x-0 bottom-[4%] -z-10 h-[300px] sm:bottom-[8%] sm:h-[400px] [mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent),linear-gradient(180deg,transparent,#000_25%,#000_75%,transparent)] [mask-composite:intersect] [-webkit-mask-composite:source-in] lg:[mask-image:linear-gradient(90deg,transparent_28%,#000_58%,#000_90%,transparent),linear-gradient(180deg,transparent,#000_25%,#000_75%,transparent)]"
       >
         <WaveLines />
       </motion.div>
@@ -43,7 +47,7 @@ export default function Hero() {
             as="h1"
             play={introDone}
             delay={0.15}
-            className="display text-[clamp(44px,7.6vw,100px)] text-fg"
+            className="display text-[clamp(44px,min(7.6vw,9.4svh),100px)] text-fg"
             lines={[
               "Turn every",
               "conversation",
@@ -57,7 +61,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={introDone ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.9, ease, delay: 0.5 }}
-            className="mt-7 max-w-[560px] text-[17px] leading-relaxed text-muted sm:text-lg"
+            className="mt-7 max-w-[560px] text-[17px] leading-relaxed text-muted sm:text-lg lg:mt-[min(28px,3svh)]"
           >
             We build WhatsApp chatbots, Instagram and Facebook auto-replies, website chat, bulk SMS, online stores and CRM
             integrations. One team sets it up and supports it, so every enquiry gets a quick reply and a follow-up.
@@ -67,7 +71,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={introDone ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.9, ease, delay: 0.65 }}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            className="mt-9 flex flex-wrap items-center gap-3 lg:mt-[min(36px,3.6svh)]"
           >
             <MagneticButton href="#contact" className="h-[52px] px-7">
               Book a free demo <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -88,7 +92,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={introDone ? { opacity: 1 } : undefined}
             transition={{ duration: 1, delay: 0.85 }}
-            className="mt-10 flex items-center gap-4 text-[13px] text-muted"
+            className="mt-10 flex items-center gap-4 text-[13px] text-muted lg:mt-[min(40px,3.6svh)]"
           >
             <span>Works on</span>
             <div className="flex items-center gap-3.5 text-fg/60" aria-label="WhatsApp, Instagram, Messenger, SMS and payments">
@@ -106,16 +110,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={introDone ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 1, ease, delay: 0.35 }}
-          className="w-full max-w-[220px] justify-self-center sm:max-w-[270px] lg:col-span-5 lg:max-w-[330px] lg:justify-self-center"
+          className="justify-self-center lg:col-span-5"
         >
+          {/* Sized by height so the tall phone always fits the first screen */}
           <Image
-            src="/hero/banner-phone.webp"
+            src="/hero/phone-tall.webp"
             alt="Smartphone showing a business chat with a confirmed payment"
-            width={528}
-            height={851}
+            width={607}
+            height={1131}
             priority
-            sizes="(min-width: 1024px) 330px, (min-width: 640px) 270px, 220px"
-            className="h-auto w-full drop-shadow-[0_40px_70px_rgba(242,194,27,0.12)]"
+            sizes="(min-width: 1024px) 380px, 240px"
+            className="h-[min(440px,62svh)] w-auto drop-shadow-[0_40px_70px_rgba(242,194,27,0.12)] lg:h-[min(680px,74svh)]"
           />
         </motion.div>
       </div>
