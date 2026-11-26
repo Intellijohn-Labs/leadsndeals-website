@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HeroPhone from "./HeroPhone";
 import { motion } from "motion/react";
 import { ArrowRight, CreditCard, MessageSquareText } from "lucide-react";
 import TextMask from "@/components/motion/TextMask";
@@ -112,16 +112,12 @@ export default function Hero() {
           transition={{ duration: 1, ease, delay: 0.35 }}
           className="justify-self-center lg:col-span-5"
         >
-          {/* Sized by height so the tall phone always fits the first screen */}
-          <Image
-            src="/hero/phone-tall.webp"
-            alt="Smartphone showing a business chat with a confirmed payment"
-            width={607}
-            height={1131}
-            priority
-            sizes="(min-width: 1024px) 380px, 240px"
-            className="h-[min(440px,62svh)] w-auto drop-shadow-[0_40px_70px_rgba(242,194,27,0.12)] lg:h-[min(680px,74svh)]"
+          {/* Phone with a live, looping WhatsApp bot chat; sized by height so it always fits the first screen */}
+          <HeroPhone
+            play={introDone}
+            className="h-[min(440px,62svh)] drop-shadow-[0_40px_70px_rgba(242,194,27,0.12)] lg:h-[min(680px,74svh)]"
           />
+          <p className="mt-3 text-center text-[12px] text-muted">Example conversations</p>
         </motion.div>
       </div>
     </section>
