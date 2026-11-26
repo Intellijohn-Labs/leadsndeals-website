@@ -90,7 +90,7 @@ export default function Footer() {
 
       <div className="container-x flex flex-col items-center justify-between gap-3 border-t border-white/[0.06] py-7 text-[13px] text-dim sm:flex-row">
         <span className="text-center sm:text-left">
-          © {new Date().getFullYear()} {site.legal.tradeName}. {site.legal.constitution} of {site.legal.owner}.
+          © {new Date().getFullYear()} {site.legal.tradeName}. All rights reserved.
         </span>
         <span className="flex items-center gap-5">
           <a href="/privacy" className="tactile hover:text-fg">

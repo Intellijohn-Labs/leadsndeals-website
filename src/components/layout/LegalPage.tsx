@@ -25,7 +25,7 @@ export default function LegalPage({ title, children }: { title: string; children
       </main>
       <footer className="border-t border-white/[0.06]">
         <div className="container-x py-8 text-[13px] text-muted">
-          © {new Date().getFullYear()} {site.legal.tradeName} ({site.legal.constitution} of {site.legal.owner}) · {site.contact.address}
+          © {new Date().getFullYear()} {site.legal.tradeName} · {site.contact.address}
         </div>
       </footer>
     </div>
