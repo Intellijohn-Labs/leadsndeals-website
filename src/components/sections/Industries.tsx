@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { CakeSlice, GraduationCap, House, ShoppingBag, Stethoscope, Trophy } from "lucide-react";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 
 const industries = [
   { icon: House, name: "Real estate", line: "Qualify enquiries from ads and book site visits automatically.", bg: "#17171a", fg: "#f4f3ee" },
@@ -40,18 +39,17 @@ export default function Industries() {
     <section data-section="Industries" className="paper relative overflow-hidden py-28 sm:py-36">
       <div className="container-x">
         <div className="mx-auto max-w-[760px] text-center">
-          <ScrambleText text="Who we work with" className="mb-5 text-brand-deep" />
           <TextMask
             className="display text-[clamp(38px,5.6vw,76px)] text-paper-ink"
             lines={[
               <>
-                Built for businesses <span className="serif-accent">that</span>
+                Built for businesses that
               </>,
               "run on conversations.",
             ]}
           />
           <p className="mx-auto mt-6 max-w-[520px] text-[16px] text-paper-muted">
-            Hover the deck to spread it out. Same building blocks, tuned for how your customers buy.
+            The same building blocks, set up for how your customers buy.
           </p>
         </div>
 

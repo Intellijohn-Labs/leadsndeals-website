@@ -27,9 +27,9 @@ const canRecord = () =>
   typeof window !== "undefined" && typeof MediaRecorder !== "undefined" && !!navigator.mediaDevices?.getUserMedia;
 
 const ERRORS: Record<string, string> = {
-  "not-allowed": "Allow microphone access to speak to Ira.",
-  "service-not-allowed": "Allow microphone access to speak to Ira.",
-  NotAllowedError: "Allow microphone access to speak to Ira.",
+  "not-allowed": "Allow microphone access to use voice input.",
+  "service-not-allowed": "Allow microphone access to use voice input.",
+  NotAllowedError: "Allow microphone access to use voice input.",
   "no-speech": "I didn't catch that. Tap the mic and try again.",
   "audio-capture": "No microphone found.",
   NotFoundError: "No microphone found.",

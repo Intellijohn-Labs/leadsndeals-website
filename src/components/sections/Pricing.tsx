@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 import { ArrowRight, Check } from "lucide-react";
 import { chatbotNotes, chatbotPlans, inr, smsNotes, smsPackages } from "@/config/site";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 import { prefillContact } from "./Contact";
 import { cn } from "@/lib/utils";
 
@@ -20,12 +19,11 @@ export default function Pricing() {
       <div className="container-x">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <ScrambleText text="Pricing" className="mb-5 text-brand" />
             <TextMask
               className="display text-[clamp(38px,5vw,68px)]"
               lines={[
                 <>
-                  Simple plans, <span className="serif-accent text-brand">clear</span>
+                  Simple plans, clear
                 </>,
                 "prices.",
               ]}

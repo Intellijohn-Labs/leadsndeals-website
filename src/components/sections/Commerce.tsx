@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { Check, CheckCheck, ShoppingCart, Store, Truck, Undo2 } from "lucide-react";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 import Parallax from "@/components/motion/Parallax";
 import { WhatsAppIcon } from "@/components/ui/BrandIcons";
 
@@ -76,7 +75,7 @@ function WhatsAppDemo() {
         <div className="flex items-center gap-3 bg-[#1f2c33] px-4 py-3">
           <span className="grid h-9 w-9 place-items-center rounded-full bg-brand text-[13px] font-bold text-ink">SB</span>
           <div className="leading-tight">
-            <div className="text-[14px] font-medium text-white">Sweet Bakes</div>
+            <div className="text-[14px] font-medium text-white">Sweet Bakes · example</div>
             <div className="text-[11px] text-white/55">{typing ? "typing…" : "Business account · online"}</div>
           </div>
           <WhatsAppIcon className="ml-auto h-5 w-5 text-wa" />
@@ -182,13 +181,12 @@ export default function Commerce() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <ScrambleText text="E-commerce" className="mb-5 text-brand" />
           <TextMask
             className="display text-[clamp(38px,5.6vw,76px)]"
             lines={[
               "Sell where your",
               <>
-                customers <span className="serif-accent text-brand">chat.</span>
+                customers chat.
               </>,
             ]}
           />

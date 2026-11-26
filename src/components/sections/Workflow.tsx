@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Bot, BellRing, CheckCheck, MessageCircle, Workflow as WorkflowIcon } from "lucide-react";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 import { cn } from "@/lib/utils";
 
 const steps = [
@@ -117,20 +116,18 @@ export default function Workflow() {
       className="grain relative isolate overflow-hidden lg:h-[100svh]"
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <div className="grid-lines absolute inset-0 opacity-70" />
         <div className="absolute left-1/2 top-1/2 h-[480px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full glow [--glow-color:rgb(123_97_255/0.08)]" />
       </div>
 
       <div className="container-x flex h-full flex-col py-24 lg:pb-12 lg:pt-[calc(var(--nav-h)+28px)]">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <ScrambleText text="How it works" className="mb-5 text-brand" />
             <TextMask
               className="display text-[clamp(38px,5.6vw,76px)]"
               lines={[
                 "From first message",
                 <>
-                  to <span className="serif-accent text-brand">closed deal.</span>
+                  to closed deal.
                 </>,
               ]}
             />

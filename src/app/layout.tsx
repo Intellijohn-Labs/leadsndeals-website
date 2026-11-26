@@ -1,20 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/providers/Providers";
-import { site } from "@/config/site";
+import { faqs, services, site } from "@/config/site";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-inter-tight",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -31,6 +23,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  alternates: { canonical: "/" },
   keywords: [
     "WhatsApp automation",
     "WhatsApp Business API",
@@ -62,13 +55,49 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-intro="pending"
-      className={`${interTight.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      className={`${interTight.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body>
         <noscript>
           <style>{`html[data-intro]{overflow:auto!important}[data-preloader]{display:none!important}`}</style>
         </noscript>
+        <script
+          type="application/ld+json"
+          // Organization + Services + FAQ for search engines
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  name: site.legalName,
+                  alternateName: site.name,
+                  url: site.url,
+                  logo: `${site.url}/brand/logo.png`,
+                  email: site.contact.email,
+                  telephone: site.contact.phones,
+                  description: site.description,
+                },
+                ...services.map((s) => ({
+                  "@type": "Service",
+                  name: s.title,
+                  description: s.description,
+                  provider: { "@type": "Organization", name: site.legalName },
+                  areaServed: "IN",
+                })),
+                {
+                  "@type": "FAQPage",
+                  mainEntity: faqs.map((f) => ({
+                    "@type": "Question",
+                    name: f.q,
+                    acceptedAnswer: { "@type": "Answer", text: f.a },
+                  })),
+                },
+              ],
+            }),
+          }}
+        />
         <Providers>{children}</Providers>
       </body>
     </html>

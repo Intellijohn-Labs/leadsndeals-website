@@ -5,8 +5,9 @@
   --color-ink-2: #101012;
   --color-ink-3: #17171a;
   --color-fg: #f4f3ee;
-  --color-muted: #9b9a93;
-  --color-dim: #5d5c57;
+  /* Raised for WCAG AA contrast on the dark background (was #9b9a93 / #5d5c57) */
+  --color-muted: #b1b0a9;
+  --color-dim: #8c8b84;
   --color-brand: #f2c21b;
   --color-brand-2: #ffd84d;
   --color-brand-deep: #c99a00;
@@ -84,9 +85,10 @@ section[id] {
 }
 
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 

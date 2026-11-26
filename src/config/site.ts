@@ -7,12 +7,13 @@ export const site = {
   name: "Leadsndeals",
   legalName: "Leadsndeals Intelligent Automations",
   tagline: "Intelligent Automations",
-  url: "https://leadsndeals.com", // TODO: confirm production domain
+  // Canonical address. Set NEXT_PUBLIC_SITE_URL=https://leadsndeals.com once the domain is connected.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://leadsndeals-website.vercel.app",
   description:
     "AI chatbots for WhatsApp, Instagram, Facebook and websites, Direct SMS, n8n workflow automation, e-commerce and web development — one intelligent system that replies in seconds and follows up until the deal closes.",
 
   contact: {
-    /** WhatsApp chat = the WAAU number that runs the Leadsndeals bot (Ira); digits only with country code. */
+    /** WhatsApp chat = the WAAU number that runs the Leadsndeals bot (Lia); digits only with country code. */
     whatsapp: "919048338111",
     /** Call numbers shown in the contact section and footer. */
     phones: ["+91 99617 74455", "+91 80864 95777"],
@@ -207,10 +208,10 @@ export const smsNotes = [
 export const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
 
 export const assistant = {
-  name: "Ira",
+  name: "Lia",
   role: "Leadsndeals AI assistant",
   greeting:
-    "Hi, I'm Ira 👋 I can explain how Leadsndeals automates WhatsApp, Instagram, websites, SMS and more. What would you like to automate?",
+    "Hi, I'm Lia, the Leadsndeals assistant. Ask me about our services, pricing or booking a demo.",
   suggestions: [
     "Automate my WhatsApp",
     "Instagram & Facebook replies",
@@ -231,7 +232,8 @@ export const assistant = {
   portrait: "/assistant/ira.webp" as string,
   // handoffAt: the idle frame (seconds) that best matches the greeting's last frame — where idle resumes after greeting
   idle: { webm: "/assistant/ira-idle.webm" as string, mov: "" as string, handoffAt: 5.958 },
-  greetingClip: { webm: "/assistant/ira-hi.webm" as string, mov: "" as string },
+  // The recorded greeting says the old name ("Ira"), so it's off. Add a new clip here if one is made for Lia.
+  greetingClip: { webm: "" as string, mov: "" as string },
   // talking loop shown while Ira's voice is playing (not word-accurate lip-sync)
   // Spoken replies are off, so the talking loop isn't loaded. Restore "/assistant/ira-talk.webm" if they return.
   talk: { webm: "" as string, mov: "" as string },

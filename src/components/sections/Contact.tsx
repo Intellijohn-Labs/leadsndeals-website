@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Check, Loader2, Mail, Phone } from "lucide-react";
 import Parallax from "@/components/motion/Parallax";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 import MagneticButton from "@/components/motion/MagneticButton";
 import { useApp } from "@/components/providers/Providers";
 import { InstagramIcon, MessengerIcon, N8nIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
@@ -17,7 +16,7 @@ export function prefillContact(service: string) {
   window.dispatchEvent(new CustomEvent("lnd:prefill", { detail: { service } }));
 }
 
-const serviceOptions = [...services.map((s) => s.title), "Voice AI Agents (early access)", "Not sure yet"];
+const serviceOptions = [...services.map((s) => s.title), "Not sure yet"];
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -99,13 +98,12 @@ export default function Contact() {
       </div>
 
       <div className="container-x text-center">
-        <ScrambleText text="Let's talk" className="mb-6 text-brand" />
         <TextMask
           className="display mx-auto max-w-[1100px] text-[clamp(46px,8.4vw,128px)]"
           lines={[
             "Let's turn your",
             <>
-              leads into <span className="serif-accent text-brand">deals.</span>
+              leads into deals.
             </>,
           ]}
         />

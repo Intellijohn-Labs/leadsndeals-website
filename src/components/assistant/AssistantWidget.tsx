@@ -66,7 +66,8 @@ export default function AssistantWidget() {
     // Phones get the compact bubble: the presenter card would cover too much of the screen.
     const compact = isPhone();
     const t = setTimeout(
-      () => setMode((m) => (m === "hidden" ? (compact ? "bubble" : "card") : m)),
+      // Always start as the small bubble: the big presenter card covered page content.
+      () => setMode((m) => (m === "hidden" ? "bubble" : m)),
       compact ? 900 : 2200,
     );
     return () => clearTimeout(t);
@@ -255,7 +256,7 @@ export default function AssistantWidget() {
                 <button
                   onClick={() => {
                     dictation.stop();
-                    setMode(dismissedRef.current || isPhone() ? "bubble" : "card");
+                    setMode("bubble");
                     setGreet(false);
                   }}
                   aria-label="Close chat"

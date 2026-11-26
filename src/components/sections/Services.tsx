@@ -6,7 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 import { services, type Service } from "@/config/site";
 import ServiceIcon from "@/components/ui/ServiceIcon";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 import { openAssistant } from "@/components/providers/Providers";
 import { cn } from "@/lib/utils";
 
@@ -202,12 +201,11 @@ export default function Services() {
       <div className="container-x pb-10 pt-24 sm:pt-32 lg:pb-0">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <ScrambleText text="What we automate" className="mb-5 text-brand" />
             <TextMask
               className="display text-[clamp(38px,5.6vw,76px)]"
               lines={[
                 <>
-                  Ten ways to <span className="serif-accent text-brand">never</span>
+                  Ten ways to never
                 </>,
                 "miss a customer.",
               ]}
@@ -240,6 +238,7 @@ export default function Services() {
             </div>
           ))}
         </div>
+        <p className="text-[13px] text-muted lg:hidden">Swipe to see all {services.length} services →</p>
       </div>
     </section>
   );

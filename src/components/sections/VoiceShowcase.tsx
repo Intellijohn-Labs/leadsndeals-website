@@ -7,7 +7,6 @@ import Presenter from "@/components/assistant/Presenter";
 import PixelReveal from "@/components/motion/PixelReveal";
 import Parallax from "@/components/motion/Parallax";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 import MagneticButton from "@/components/motion/MagneticButton";
 import { assistant } from "@/config/site";
 import { prefillContact } from "@/components/sections/Contact";
@@ -126,7 +125,7 @@ function Phone() {
 
       {/* coming soon ribbon */}
       <div className="absolute -left-6 top-[38%] z-30 -rotate-[8deg] rounded-full bg-paper-ink px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-brand shadow-xl sm:-left-14">
-        Calling · coming soon
+        Example call · coming soon
       </div>
     </div>
   );
@@ -135,19 +134,17 @@ function Phone() {
 export default function VoiceShowcase() {
   return (
     <section id="voice" data-section="Voice AI" className="paper relative isolate overflow-hidden py-28 sm:py-36">
-      <div aria-hidden="true" className="grid-lines absolute inset-0 -z-10 opacity-80" />
       <Parallax speed={0.6} className="absolute -right-32 top-10 -z-10 h-[420px] w-[420px] rounded-full glow [--glow-color:rgb(242_194_27/0.3)]" />
       <Parallax speed={-0.4} className="absolute -left-20 bottom-0 -z-10 h-[340px] w-[340px] rounded-full glow [--glow-color:rgb(123_97_255/0.15)]" />
 
       <div className="container-x grid items-center gap-16 lg:grid-cols-2">
         <div>
-          <ScrambleText text="Voice AI agents" className="mb-5 text-brand-deep" />
           <TextMask
             className="display text-[clamp(38px,5.6vw,76px)] text-paper-ink"
             lines={[
               "An agent that",
               <>
-                <span className="serif-accent">picks up</span> every call.
+                picks up every call.
               </>,
             ]}
           />

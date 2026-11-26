@@ -44,7 +44,7 @@ export default function TextMask({
       transition={{ staggerChildren: stagger, delayChildren: delay }}
     >
       {lines.map((line, i) => (
-        <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+        <span key={i} className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
           <motion.span
             className={cn("block", lineClassName)}
             variants={{

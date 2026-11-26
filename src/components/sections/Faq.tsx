@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { faqs } from "@/config/site";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 import { openAssistant } from "@/components/providers/Providers";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +16,6 @@ export default function Faq() {
     <section id="faq" data-section="FAQ" className="relative border-t border-white/[0.06] bg-ink-2 py-28 sm:py-36">
       <div className="container-x grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <ScrambleText text="Questions" className="mb-5 text-brand" />
           <TextMask className="display text-[clamp(38px,5vw,68px)]" lines={["Good to know."]} />
           <p className="mt-6 max-w-[320px] text-[15.5px] leading-relaxed text-muted">
             Can&apos;t find your answer?{" "}

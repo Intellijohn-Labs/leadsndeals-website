@@ -46,6 +46,7 @@ function Row({ items }: { items: Item[] }) {
         {[...items, ...items, ...items, ...items].map((it, i) => (
           <span
             key={i}
+            aria-hidden={i >= items.length ? true : undefined}
             className="flex shrink-0 items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.025] py-2 pl-2 pr-5 transition-colors duration-300 hover:border-white/20 hover:bg-white/[0.05]"
           >
             <span

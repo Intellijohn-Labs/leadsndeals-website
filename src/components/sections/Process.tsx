@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import TextMask from "@/components/motion/TextMask";
-import ScrambleText from "@/components/motion/ScrambleText";
 
 const steps = [
   {
@@ -52,13 +51,12 @@ export default function Process() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-[calc(var(--nav-h)+40px)]">
-              <ScrambleText text="How we work" className="mb-5 text-brand" />
               <TextMask
                 className="display text-[clamp(38px,5vw,68px)]"
                 lines={[
                   "Three steps.",
                   <>
-                    <span className="serif-accent text-brand">Zero</span> guesswork.
+                    Zero guesswork.
                   </>,
                 ]}
               />
