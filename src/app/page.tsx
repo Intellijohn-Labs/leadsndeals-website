@@ -12,6 +12,7 @@ import Industries from "@/components/sections/Industries";
 import Process from "@/components/sections/Process";
 import Faq from "@/components/sections/Faq";
 import Pricing from "@/components/sections/Pricing";
+import Brands from "@/components/sections/Brands";
 import Contact from "@/components/sections/Contact";
 import AssistantWidget from "@/components/assistant/AssistantWidget";
 
@@ -36,6 +37,7 @@ export default function Home() {
         <ChannelMarquee />
         <Statement />
         <Services />
+        <Brands />
         <Workflow />
         <VoiceShowcase />
         <Commerce />
